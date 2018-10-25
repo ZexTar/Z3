@@ -1,11 +1,13 @@
 const maze = require('./mazegenerator');
-const [sCoord, eCoord] = require('./config');
+const {
+	xStart,
+	yStart,
+	xEnd,
+	yEnd,
+} = require('./config');
 
-const [startX, startY] = sCoord;
-const [endX, endY] = eCoord;
 const colChecked = new Array(10).fill();
 const checked = colChecked.map(() => new Array(10).fill(false));
-const buffer = [];
 const path = [];
 
 const rowNum = [-1, 0, 0, 1];
@@ -50,8 +52,9 @@ const pushPairs = (arr) => { // push coordinates in pairs
 };
 
 const solveMaze = () => {
-	checked[startX][startY] = true;
-	const bufferNode = [sCoord, 0];
+	const buffer = [];
+	checked[xStart][yStart] = true;
+	const bufferNode = [[xStart, yStart], 0];
 	buffer.push(bufferNode);
 
 	while (buffer.length) {
@@ -59,7 +62,7 @@ const solveMaze = () => {
 		const [x, y] = currentNode[0];
 		const distance = currentNode[1];
 
-		if (x === endX && y === endY) {
+		if (x === xEnd && y === yEnd) {
 			console.log(`It took ${distance} steps to reach endpoint!`);
 			return currentNode;
 		}
