@@ -1,4 +1,4 @@
-const maze = require('./mazegenerator');
+const generateMaze = require('./mazegenerator');
 const {
 	xStart,
 	yStart,
@@ -6,8 +6,6 @@ const {
 	yEnd,
 } = require('./config');
 
-const colChecked = new Array(10).fill();
-const checked = colChecked.map(() => new Array(10).fill(false));
 const path = [];
 
 const rowNum = [-1, 0, 0, 1];
@@ -52,6 +50,9 @@ const pushPairs = (arr) => { // push coordinates in pairs
 };
 
 const solveMaze = () => {
+	const maze = generateMaze();
+	const colChecked = new Array(10).fill();
+	const checked = colChecked.map(() => new Array(10).fill(false));
 	const buffer = [];
 	checked[xStart][yStart] = true;
 	const bufferNode = [[xStart, yStart], 0];
@@ -63,6 +64,7 @@ const solveMaze = () => {
 		const distance = currentNode[1];
 
 		if (x === xEnd && y === yEnd) {
+			console.log(maze);
 			console.log(`It took ${distance} steps to reach endpoint!`);
 			return currentNode;
 		}
@@ -81,22 +83,19 @@ const solveMaze = () => {
 		}
 	}
 
-	return false;
+	return solveMaze();
 };
 
 const shortestPath = () => {
-	const nodes = solveMaze();
-
-	if (!nodes) {
-		return 'endpoint is unreachable!!!';
+	try {
+		const nodes = solveMaze();
+		const flatNodes = deepFlat(nodes);
+		const coordinates = getCoordinates(flatNodes).reverse().slice(2); // slice to remove starting point
+		pushPairs(coordinates);
+		return path;
+	} catch (err) {
+		return '10x10 maze with THAT number of blocks is not solvable';
 	}
-
-	const flatNodes = deepFlat(nodes);
-	const coordinates = getCoordinates(flatNodes).reverse().slice(2); // slice to remove starting point
-	pushPairs(coordinates);
-
-	return path;
 };
 
-console.log(maze);
 console.log(shortestPath());
