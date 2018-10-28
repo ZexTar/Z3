@@ -1,13 +1,13 @@
 // select starting point
-const xStart = 4;
-const yStart = 4;
+const xStart = 0;
+const yStart = 2;
 
 // select ending point
-const xEnd = 6;
-const yEnd = 6;
+const xEnd = 5;
+const yEnd = 9;
 
 // number of blocks
-const blocks = 85;
+const blocks = 20;
 
 module.exports = {
 	xStart,
