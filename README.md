@@ -1,5 +1,5 @@
 # Z3
-This code represents binary maze solver without walls. It is basically implementation of DFS algo in javascript, source:
+This code represents binary-no walls maze solver. It is basically implementation of DFS algo in javascript, source:
 
 https://en.wikipedia.org/wiki/Depth-first_search
 
