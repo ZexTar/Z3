@@ -22,7 +22,7 @@ const yEnd = 13;
 // number of blocks
 const blocks = 170;
 ```
-Use ```npm start``` to run this code.
+Use ```npm install``` and then ```npm start``` to run this code.
 
 
 
