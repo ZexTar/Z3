@@ -1,5 +1,6 @@
 const generateMaze = require('./mazegenerator');
 const {
+	dim,
 	xStart,
 	yStart,
 	xEnd,
@@ -11,7 +12,7 @@ const path = [];
 const rowNum = [-1, 0, 0, 1];
 const colNum = [0, -1, 1, 0];
 
-const isValid = (row, col) => (row >= 0) && (col >= 0) && (row < 10) && (col < 10);
+const isValid = (row, col) => (row >= 0) && (col >= 0) && (row < dim) && (col < dim);
 
 const getCoordinates = (nodes) => { // get coordinates from nodes array
 	const coordinates = nodes;
@@ -51,8 +52,8 @@ const pushPairs = (arr) => { // push coordinates in pairs
 
 const solveMaze = () => {
 	const maze = generateMaze();
-	const colChecked = new Array(10).fill();
-	const checked = colChecked.map(() => new Array(10).fill(false));
+	const colChecked = new Array(dim).fill();
+	const checked = colChecked.map(() => new Array(dim).fill(false));
 	const buffer = [];
 	checked[xStart][yStart] = true;
 	const bufferNode = [[xStart, yStart], 0];

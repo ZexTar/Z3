@@ -1,4 +1,5 @@
 const {
+	dim,
 	xStart,
 	yStart,
 	xEnd,
@@ -9,11 +10,11 @@ const {
 const rowNum = [-1, 0, 0, 1];
 const colNum = [0, -1, 1, 0];
 
-const isValid = (row, col) => (row >= 0) && (col >= 0) && (row < 10) && (col < 10);
+const isValid = (row, col) => (row >= 0) && (col >= 0) && (row < dim) && (col < dim);
 
 const generateMaze = () => {
-	const column = new Array(10).fill();
-	const maze = column.map(() => new Array(10).fill(0));
+	const column = new Array(dim).fill();
+	const maze = column.map(() => new Array(dim).fill(0));
 	const buffer = [];
 	let neighbors = [];
 	const bufferNode = [xStart, yStart];
@@ -26,13 +27,14 @@ const generateMaze = () => {
 
 		if (x === xEnd && y === yEnd) {
 			let blockNum = 0;
-			for (let i = 0; i < maze.length; i += 1) {
-				maze[i].forEach((el) => {
-					if (el === 0) {
+			maze.forEach((el) => {
+				for (let i = 0; i < el.length; i += 1) {
+					if (el[i] === 0) {
 						blockNum += 1;
 					}
-				});
-			}
+				}
+			});
+
 			if (blockNum === blocks) {
 				return maze;
 			}
