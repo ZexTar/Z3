@@ -1,7 +1,7 @@
 # Z3
-This code represents binary-no walls maze solver. It is basically implementation of DFS algo in javascript, source:
+This code represents binary-no walls maze solver. It is basically implementation of BFS algo in javascript, source:
 
-https://en.wikipedia.org/wiki/Depth-first_search
+https://en.wikipedia.org/wiki/Breadth-first_search
 
 There is also function that can generate random maze with specific number of unpassable squares.
 
