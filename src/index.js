@@ -7,8 +7,6 @@ const {
 	yEnd,
 } = require('./config');
 
-const path = [];
-
 const rowNum = [-1, 0, 0, 1];
 const colNum = [0, -1, 1, 0];
 
@@ -41,13 +39,14 @@ const deepFlat = (arr) => { // handle nested arrays
 	return res.reverse();
 };
 
-const pushPairs = (arr) => { // push coordinates in pairs
+const pushPairs = (arr, path) => { // push coordinates in pairs
+	const fillPath = path;
 	if (arr.length === 0) {
-		return false;
+		return fillPath;
 	}
-	path.push(arr.splice(0, 2).reverse());
+	fillPath.push(arr.splice(0, 2).reverse());
 
-	return pushPairs(arr);
+	return pushPairs(arr, fillPath);
 };
 
 const solveMaze = () => {
@@ -88,12 +87,12 @@ const solveMaze = () => {
 };
 
 const shortestPath = () => {
+	const path = [];
 	try {
 		const nodes = solveMaze();
 		const flatNodes = deepFlat(nodes);
 		const coordinates = getCoordinates(flatNodes).reverse().slice(2); // slice to remove starting point
-		pushPairs(coordinates);
-		return path;
+		return pushPairs(coordinates, path);
 	} catch (err) {
 		return '10x10 maze with THAT number of blocks is not solvable';
 	}
