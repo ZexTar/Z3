@@ -1,4 +1,4 @@
-# Z3
+# binary_maze_solver
 This code represents binary-no walls maze solver. It is basically implementation of BFS algo in javascript, source:
 
 https://en.wikipedia.org/wiki/Breadth-first_search
